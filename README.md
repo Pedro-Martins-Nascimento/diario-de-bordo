@@ -39,16 +39,24 @@ acabou travando alguns merges nos dias seguintes (ver entrada de
 04/09/2026), mas era exatamente o comportamento configurado aqui.
 
 **Imagens:**
-- `imagens/2026-08-25/01-criacao-repositorio.jpeg` — criação do
-  repositório no GitHub
-- `imagens/2026-08-26/01-primeiro-commit-vscode.jpeg` — primeiro commit
-  pelo VS Code
-- `imagens/2026-08-26/02-gitignore-firebase.jpeg` — `.gitignore` com
-  exclusão da config sensível do Firebase
-- `imagens/2026-08-26/03-ruleset-criacao-nome.jpeg` até
-  `08-ruleset-criado-ativo.jpeg` — passo a passo da criação da ruleset
-  `main-protection` (PR obrigatória, 1 aprovação, squash-only, bloqueio
-  de force push)
+
+![Criação do repositório no GitHub](imagens/2026-08-25/01-criacao-repositorio.jpeg)
+*Criação do repositório no GitHub*
+
+![Primeiro commit pelo VS Code](imagens/2026-08-26/01-primeiro-commit-vscode.jpeg)
+*Primeiro commit pelo VS Code*
+
+![.gitignore com exclusão da config sensível do Firebase](imagens/2026-08-26/02-gitignore-firebase.jpeg)
+*`.gitignore` com exclusão da config sensível do Firebase*
+
+![Criação da ruleset main-protection: nome e status](imagens/2026-08-26/03-ruleset-criacao-nome.jpeg)
+![Criação da ruleset main-protection: branch rules](imagens/2026-08-26/04-ruleset-branch-rules.jpeg)
+![Criação da ruleset main-protection: aprovações obrigatórias](imagens/2026-08-26/05-ruleset-approvals-e-squash.jpeg)
+![Criação da ruleset main-protection: squash-only e code owners](imagens/2026-08-26/06-ruleset-squash-e-code-owners.jpeg)
+![Criação da ruleset main-protection: bloqueio de force push](imagens/2026-08-26/07-ruleset-force-push-e-create.jpeg)
+![Ruleset main-protection criada e ativa](imagens/2026-08-26/08-ruleset-criado-ativo.jpeg)
+*Passo a passo da criação da ruleset `main-protection` (PR obrigatória, 1
+aprovação, squash-only, bloqueio de force push)*
 
 ---
 
@@ -74,10 +82,12 @@ acabou travando alguns merges nos dias seguintes (ver entrada de
 boilerplate, com `flutter analyze` e `flutter test` passando 100%.
 
 **Imagens:**
-- `imagens/2026-09-02/01-pr2-merged.jpeg` e
-  `02-pr2-descricao-reviewers.jpeg` — merge da PR #2, que entregou essa
-  limpeza (os prints são de 02/09; o trabalho local foi feito em 29/08,
-  mas a PR só foi mergeada no GitHub alguns dias depois)
+
+![PR #2 mergeada](imagens/2026-09-02/01-pr2-merged.jpeg)
+![Descrição e reviewers da PR #2](imagens/2026-09-02/02-pr2-descricao-reviewers.jpeg)
+*Merge da PR #2, que entregou essa limpeza (os prints são de 02/09; o
+trabalho local foi feito em 29/08, mas a PR só foi mergeada no GitHub
+alguns dias depois)*
 
 ---
 
@@ -150,8 +160,9 @@ fases N1/N2/N3 e o protótipo visual em HTML (`docs/appProvas.html`) — e
 que serviu de base pra este diário de bordo.
 
 **Imagens:**
-- `imagens/2026-09-03/01-pr6-aprovada-kelcia.jpeg` — PR #6 aprovada por
-  `KelciaAntiuk`, pronta pra squash merge
+
+![PR #6 aprovada por KelciaAntiuk](imagens/2026-09-03/01-pr6-aprovada-kelcia.jpeg)
+*PR #6 aprovada por `KelciaAntiuk`, pronta pra squash merge*
 
 ---
 
