@@ -228,6 +228,72 @@ GitHub pra quem for conferir depois.
 
 ---
 
+## 08/09/2026
+
+**O que foi feito:** troca da conta ativa do GitHub CLI, merge da PR #9
+(`feature/tela-provas`) na `main`, e início da análise da PR #3 (banco de
+questões), que foi interrompida por ter um conflito de lógica de negócio
+real — decisão de como resolver ficou pendente.
+
+**Como foi feito:**
+- Usei o Claude Code para trocar a conta ativa do `gh` de `pedron-martins`
+  para `Pedro-Martins-Nascimento` (`gh auth switch`), dona do repositório
+  `flutter_dart`.
+- Revisei a PR #9 (`feature/tela-provas` → `main`, autora `KarenAmancio`):
+  fiz checkout, mergeei `main` na branch e resolvi um conflito pontual em
+  `lib/router/app_router.dart` (a branch ainda tinha rotas soltas de
+  `/criar-prova` e `/gerar-provas` fora do shell; a `main` já tinha
+  migrado essas rotas pra dentro da `StatefulShellRoute` com bottom nav —
+  mantive a estrutura de shell da `main` e preservei o tratamento de
+  `ProvaGerada`/histórico que a PR trazia).
+- Rodei `flutter analyze` (sem apontamentos) e `flutter test` (1/1
+  passando) depois do merge, antes de subir.
+- Tentei `gh pr merge --merge` e esbarrei de novo na ruleset da `main`
+  (ver 25/08): exige review aprovada. Diferente do dia 04/09, dessa vez
+  aprovei a PR eu mesmo pelo `gh pr review --approve` (com o resultado da
+  validação no corpo da aprovação) antes de mergear.
+- `gh pr merge --merge` falhou de novo, mas com um motivo novo: "Merge
+  commits are not allowed on this repository" — a ruleset permite **só
+  squash merge** (como já estava documentado na entrada de 25/08, mas eu
+  tinha esquecido na hora). Troquei pra `gh pr merge --squash` e mergeou.
+- Comecei a mesma sequência na PR #3 (`feature/questoes` → `main`, autor
+  `Eduardo`): atualizei a `main` local (trouxe o squash da #9) e dei
+  `gh pr checkout 3` + merge da `main` na branch.
+- O merge da PR #3 gerou conflito real (não só cosmético) em 5 arquivos:
+  `app_router.dart`, `criar_prova_screen.dart`, `gerar_provas_screen.dart`,
+  `preview_layout_screen.dart` e `pdf_service.dart`. A causa: a `main`
+  (via PR #9) evoluiu "Criar Prova" com nome da prova, seleção de turma e
+  histórico de provas geradas (`DadosProva`), enquanto a `feature/questoes`
+  trocou o banco mock simples por um modelo real em `lib/models/questao.dart`
+  (`Questao` com `alternativas` e `respostaCorreta`, banco com 8 matérias e
+  48 questões) e passou a montar o PDF com o conteúdo real das questões em
+  vez do texto placeholder que a `main` ainda usava.
+- Cheguei a montar uma proposta de resolução (unir o modelo real de
+  questões da #3 com a UI de turma/nome/histórico da #9), mas fui
+  interrompido antes de aplicar — recebi instrução pra não mexer mais na
+  PR #3 por agora e priorizar esse registro no diário.
+- Abortei o merge em andamento (`git merge --abort`) na branch
+  `feature/questoes` pra não deixar a branch remota nem o repositório
+  `flutter_dart` com nada pela metade.
+
+**Resultado:** PR #9 mergeada na `main` (squash). PR #3 segue aberta e
+sem alterações — o merge de teste foi desfeito, o conflito real entre os
+dois modelos de questões (mock simples com turma/nome vs. modelo real com
+alternativas/gabarito) ainda precisa ser decidido antes de retomar.
+
+**Pendente:**
+- Decidir e aplicar a resolução do conflito da PR #3 (levar o modelo real
+  de `models/questao.dart` para dentro da tela que já tem nome da
+  prova/turma/histórico, sem perder nem o banco de questões novo nem a UI
+  já consolidada).
+- Revalidar com `flutter analyze` e `flutter test` depois da resolução.
+- Só commitar/mergear a #3 depois dessa decisão — sem abrir PR nova, como
+  combinado.
+
+**Imagens:** _(adicionar prints em `imagens/2026-09-08/` quando tiver)_
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
