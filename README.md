@@ -294,6 +294,46 @@ alternativas/gabarito) ainda precisa ser decidido antes de retomar.
 
 ---
 
+## 10/09/2026
+
+**O que foi feito:** troca da conta ativa do GitHub CLI e merge da PR #11
+(`feature/tela-turmas`, autora Letícia Parpineli — telas de Turmas) na
+`main`, sem abrir PR nova.
+
+**Como foi feito:**
+- Usei o Claude Code para trocar a conta ativa do `gh` de `pedron-martins`
+  para `Pedro-Martins-Nascimento` (`gh auth switch`), dona do repositório.
+- Revisei a PR #11 (`feature/tela-turmas` → `main`): checkout via
+  `gh pr checkout 11`. A branch já estava sincronizada com a `main` (merge
+  anterior no commit `b286c55`), então não houve conflito nenhum pra
+  resolver dessa vez.
+- Entrega da PR: telas de listar/criar/visualizar turma
+  (`criar_turma_screen.dart`, `visualizar_turma_screen.dart`) e importação
+  de lista de alunos via CSV/XLSX (`importar_alunos_screen.dart`, com os
+  pacotes novos `file_picker` e `excel`), além das rotas correspondentes
+  em `app_router.dart` — cobre RF03, RF04 e RF05 do escopo da N1, ainda
+  com dados mock (sem persistência real), como esperado nessa fase.
+- Rodei `flutter pub get`, `flutter analyze` (sem apontamentos) e
+  `flutter test` (1/1 passando) antes de decidir mergear.
+- Como não havia review na PR, aprovei eu mesmo com `gh pr review
+  --approve` (registrando o resultado da validação no corpo), do mesmo
+  jeito que na entrada de 08/09 — a ruleset da `main` exige 1 aprovação
+  antes do merge.
+- `gh pr merge --squash` (a ruleset só permite squash merge, como já
+  registrado em 25/08 e 08/09) — mergeou de primeira dessa vez.
+- No VS Code local sobrou uma alteração não commitada em
+  `macos/Flutter/GeneratedPluginRegistrant.swift` (arquivo que o Flutter
+  regenera sozinho a cada `pub get` quando há dependência nova). Conferi
+  com `git diff` e era só troca de fim de linha (LF → CRLF, efeito do
+  ambiente Windows) — descartei com `git restore` em vez de commitar.
+
+**Resultado:** PR #11 mergeada na `main` (squash), sem precisar de PR
+nova. `main` local atualizada via fast-forward.
+
+**Imagens:** _(adicionar prints em `imagens/2026-09-10/` quando tiver)_
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
