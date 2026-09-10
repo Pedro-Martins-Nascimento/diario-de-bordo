@@ -330,6 +330,60 @@ alternativas/gabarito) ainda precisa ser decidido antes de retomar.
 **Resultado:** PR #11 mergeada na `main` (squash), sem precisar de PR
 nova. `main` local atualizada via fast-forward.
 
+**Também nesse dia — resolução da PR #3 (banco de questões, autor Eduardo):**
+esse era o conflito real deixado pendente desde 08/09 (ver entrada acima).
+
+- Fiz checkout da PR #3 (`gh pr checkout 3`) e trouxe a `main` atualizada
+  (já com #7, #9 e #11) pra dentro da branch com `git merge origin/main`.
+- O merge reabriu o mesmo conflito de 5 arquivos já mapeado em 08/09:
+  `app_router.dart`, `criar_prova_screen.dart`, `gerar_provas_screen.dart`,
+  `preview_layout_screen.dart`, `pdf_service.dart`. Causa: o modelo de
+  questões da PR (`Questao` com alternativas e gabarito, banco com 48
+  questões/8 matérias, em `lib/models/questao.dart`) e a evolução de
+  "Criar Prova"/"Gerar Provas" que a PR #9 já tinha trazido pra `main`
+  (nome da prova, seleção de turma, histórico via `ProvasRepository`)
+  editavam os mesmos pontos de formas incompatíveis.
+- Decisão de integração (a que ficou em aberto em 08/09): manter a
+  estrutura de tela mais evoluída da `main` (nome da prova, turma,
+  histórico) e enxertar nela o banco real de questões da PR. Na prática:
+  - `criar_prova_screen.dart` passou a puxar matérias/questões de
+    `lib/models/questao.dart` em vez do mock local simples (sem
+    alternativas) que a `main` ainda tinha.
+  - Aproveitei pra unificar o modelo de `Turma` local (duplicado nessa
+    tela) com o `Turma` real do módulo de turmas (`criar_turma_screen.dart`,
+    da PR #11) — turma criada ali passa a aparecer em "Minhas Turmas"
+    também, em vez de sumir numa lista mock isolada.
+  - `gerar_provas_screen.dart` ganhou de volta a lógica de embaralhamento
+    por versão que só existia na PR (`QuestaoNaVersao`: alternativas
+    reordenadas e `respostaCorreta` recalculado por versão — o gabarito
+    de cada versão), mantendo o cabeçalho completo (nome/turma/professor/
+    histórico) que a `main` já tinha.
+  - `pdf_service.dart` e `preview_layout_screen.dart`: mantidos os
+    controles de layout (fonte/espaçamento/margem) da `main`, mas o PDF
+    passou a imprimir o enunciado e as alternativas de texto reais de
+    cada questão — antes disso o PDF da `main` só tinha um enunciado mock
+    fixo com bolinhas vazias A/B/C/D, sem gabarito de verdade nenhum.
+- Rodei `flutter analyze` (sem apontamentos) e `flutter test` (1/1)
+  depois de resolver os 5 arquivos.
+- Testei o fluxo completo manualmente rodando o app no navegador
+  (`flutter run -d web-server`, controlado via extensão Claude em Chrome):
+  criei uma prova de Matemática vinculada à turma real "3º ano B —
+  Matutino", selecionei 3 questões do banco, gerei 3 versões e abri o
+  Editor de layout — o PDF gerado mostrou o enunciado e as alternativas
+  reais de cada questão, com a ordem das alternativas (e portanto o
+  gabarito) diferente entre versões, confirmando o embaralhamento.
+- Como não havia review, aprovei eu mesmo (`gh pr review --approve`) com
+  um relatório detalhado da resolução do conflito no corpo — mesmo com
+  autonomia total pra decidir, deixei a decisão de design registrada na
+  PR pro Eduardo revisar depois. Mergeei com `gh pr merge --squash`
+  (mesma ruleset das outras), sem abrir PR nova.
+
+**Resultado:** PR #3 mergeada na `main` (squash). O banco real de
+questões (alternativas + gabarito) está integrado ao fluxo de Criar
+Prova → Gerar Provas → Exportar PDF, com gabarito recalculado por versão
+e turma unificada com o módulo de Turmas. `main` local atualizada via
+fast-forward.
+
 **Imagens:** _(adicionar prints em `imagens/2026-09-10/` quando tiver)_
 
 ---
