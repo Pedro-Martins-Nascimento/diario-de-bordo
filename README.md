@@ -384,6 +384,58 @@ Prova → Gerar Provas → Exportar PDF, com gabarito recalculado por versão
 e turma unificada com o módulo de Turmas. `main` local atualizada via
 fast-forward.
 
+**Também nesse dia — revisão e merge da PR #12 (`feat/corrigir`, autora
+KelciaAntiuk):** entrega grande, sem conflito de merge com a `main`
+(a branch já estava sincronizada), mas que precisou de uma correção antes
+de mergear.
+
+- Fiz checkout da PR #12 (`gh pr checkout 12`); `git merge origin/main`
+  não teve nada a fazer — a branch já estava com #3, #7, #9 e #11
+  incorporados.
+- Escopo entregue: banco de questões com CRUD completo (Matérias →
+  Questões → Formulário de questão, cobrindo RF06/RF07 que ainda
+  faltavam), dashboard real na tela de Início (corrigidas/pendentes/
+  média, erro por matéria, últimas provas — usando `ChangeNotifier` no
+  `ProvasRepository`), tela de Corrigir com leitura de QR via câmera
+  (pacote `mobile_scanner`, RF13/RF14), e navegação responsiva (sidebar
+  em telas largas, bottom nav em estreitas). Também relaxou o modelo
+  `Questao` pra aceitar de 2 a 8 alternativas (antes travado em
+  exatamente 4), pra combinar com o novo formulário.
+- **Achado sério antes de validar:** um dos commits da própria PR
+  (`chore(testes): remove os arquivos de teste`) apagava o único arquivo
+  de teste do projeto (`test/widget_test.dart`) inteiro, sem nenhum
+  substituto e sem justificativa no corpo do commit. Recuperei o
+  conteúdo de antes desse commit (`git show <commit>~1:test/widget_test.dart`)
+  e restaurei o arquivo — o smoke test da tela de Login continuou
+  passando normalmente mesmo depois de todas as mudanças da PR.
+- Revisei manualmente o código novo (não só rodei analyze/test): as 3
+  telas do banco de questões, o router, `main.dart`, `login_screen.dart`
+  (validação de e-mail/senha de verdade) e `provas_repository.dart`.
+  Achado menor, não bloqueante: `_totalFolhas` (em `corrigir_screen.dart`
+  e `inicio_screen.dart`) usa `turmasMock.first.qtdAlunos` — quebra com
+  `StateError` se todas as turmas forem excluídas (caso extremo,
+  registrado no comentário da PR pra próxima iteração, não corrigido
+  agora).
+- Rodei `flutter analyze` (sem apontamentos) e `flutter test` (com o
+  teste restaurado, passando) depois da correção.
+- Testei manualmente rodando o app no navegador: login com validação
+  real, dashboard de Início, criei uma questão nova no banco (matéria
+  Matemática) e confirmei que apareceu na listagem, e abri a tela de
+  Corrigir (câmera solicitada corretamente, contador de folhas
+  funcionando).
+- Aprovei (`gh pr review --approve`) com relatório detalhado no corpo —
+  citando explicitamente a remoção do teste corrigida e o achado menor
+  pendente — e mergeei com `gh pr merge --squash`, sem abrir PR nova.
+
+**Resultado:** PR #12 mergeada na `main` (squash), com o smoke test
+restaurado. App ganhou banco de questões com CRUD completo, dashboard de
+Início, correção por QR code (câmera) e navegação responsiva. `main`
+local atualizada via fast-forward.
+
+**Pendente:** tratar o caso de `turmasMock` vazio em `_totalFolhas`
+(`corrigir_screen.dart` e `inicio_screen.dart`) com um fallback, em vez
+de acessar `.first` direto.
+
 **Imagens:** _(adicionar prints em `imagens/2026-09-10/` quando tiver)_
 
 ---
