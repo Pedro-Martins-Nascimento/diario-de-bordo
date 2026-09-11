@@ -436,6 +436,53 @@ local atualizada via fast-forward.
 (`corrigir_screen.dart` e `inicio_screen.dart`) com um fallback, em vez
 de acessar `.first` direto.
 
+**Também nesse dia — revisão e merge da PR #14 (`apk-readme`, autora
+KelciaAntiuk):** README completo do projeto e ajuste de build para gerar
+o APK Android.
+
+- Fiz checkout da PR #14; `git merge origin/main` não teve nada a fazer
+  (a branch já estava sincronizada via um merge anterior feito pela
+  própria autora).
+- **Mesmo problema do teste reapareceu:** essa branch (`apk-readme`) foi
+  criada a partir de um ponto anterior à minha correção na PR #12. Quando
+  a autora mesclou a `main` atualizada nela, o merge teve um conflito
+  real de "deletado de um lado, modificado do outro" no
+  `test/widget_test.dart` (a branch tinha a remoção antiga; a `main` já
+  tinha meu conteúdo restaurado) — e a resolução manteve a remoção,
+  reintroduzindo exatamente o mesmo problema. Restaurei o arquivo de novo
+  (mesmo conteúdo de sempre).
+- Revisei o `README.md` novo (rastreabilidade de RF/RNF, telas, como
+  rodar, como gerar o APK, estrutura do projeto, equipe) e achei um bug
+  de sintaxe: o link do vídeo de demonstração estava sem os parênteses do
+  markdown (`[texto]url` em vez de `[texto](url)`), então não ficava
+  clicável no GitHub — rastreei isso a dois commits da própria PR (um
+  deixou um placeholder `(ADICIONAR-LINK-AQUI)` corretamente formatado, o
+  seguinte trocou pelo link real mas perdeu os parênteses no meio do
+  caminho). Corrigido.
+- Revisei o `android/build.gradle.kts` novo: adiciona um bloco que força
+  `compileSdkVersion=36` via reflection em qualquer subproject Android
+  cuja versão configurada seja menor — workaround comum quando algum
+  plugin (aqui, provavelmente o `mobile_scanner`) declara uma versão de
+  SDK desatualizada. Não tenho Android SDK instalado nesta máquina, então
+  não consegui rodar `flutter build apk --release` de fato para validar a
+  geração do APK — registrei essa limitação no comentário da PR.
+- Rodei `flutter analyze` (sem apontamentos) e `flutter test` (com o
+  teste restaurado, passando) depois das duas correções.
+- Aprovei com relatório detalhado citando as duas correções e a limitação
+  de validação, e mergeei com `gh pr merge --squash`, sem abrir PR nova.
+
+**Resultado:** PR #14 mergeada na `main` (squash). Projeto ganhou um
+README completo e o ajuste de build necessário para compilar o APK
+Android; smoke test seguiu restaurado e o link do vídeo corrigido.
+`main` local atualizada via fast-forward.
+
+**Pendente:**
+- Mesmo pendente de antes: tratar `turmasMock` vazio em `_totalFolhas`.
+- Gerar e testar o APK de verdade numa máquina com Android SDK instalado
+  (esta máquina não tem — ver conversa sobre isso mais cedo no dia).
+- Verificar se o vídeo de demonstração linkado no README (`youtu.be/ahXdrW6j_UQ`)
+  está mesmo acessível/não listado, como o placeholder original pedia.
+
 **Imagens:** _(adicionar prints em `imagens/2026-09-10/` quando tiver)_
 
 ---
