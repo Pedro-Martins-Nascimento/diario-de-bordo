@@ -206,25 +206,33 @@ resolvendo os conflitos reais encontrados no caminho.
 - Descobri que o repositório tem uma **ruleset** na `main` exigindo 1
   review aprovada e permitindo só squash merge — nem `gh pr merge --admin`
   contorna isso. Pedi review pra `KelciaAntiuk` nas PRs #7 e #3.
+- As PRs #3 e #7 foram aprovadas: uma foi aprovada por mim e a outra, que
+  era de minha autoria, recebeu aprovação da revisão.
 - Cheguei a criar uma PR de diário de bordo dentro do próprio repositório
   `flutter_dart` (`docs/diario-de-bordo.md`), mas o diário de bordo é essa
   pasta local mesmo — fechei a PR e apaguei o arquivo/branch de lá.
 
 **Resultado:** PRs #7 (main-shell + login) e #3 (banco de questões)
-prontas e validadas (`flutter analyze` sem apontamentos, `flutter test`
-passando), aguardando review aprovada pra mergear com squash. PR #4 ficou
+foram aprovadas e estavam prontas para mergear com squash, com
+`flutter analyze` sem apontamentos e `flutter test` passando. PR #4 ficou
 registrada como "merged" no GitHub, mas mergeada em `feature/tela-provas`
 em vez de `main` — sem efeito prático, porque o conteúdo dela chega na
 `main` de qualquer forma pela #7, mas fica esse detalhe no histórico do
 GitHub pra quem for conferir depois.
 
 **Pendente:**
-- Aguardar aprovação de `KelciaAntiuk` e mergear `#7` e depois `#3` (nessa
-  ordem, via squash).
+- Registrar os prints das PRs #3 e #7 em `imagens/` quando forem copiados
+  para a pasta local do diario.
 - Revalidar `#3` contra a `main` depois que `#7` for mergeada (as duas
   mexem em `app_router.dart`, pode surgir conflito novo).
 
-**Imagens:** _(adicionar prints em `imagens/2026-09-04/` quando tiver)_
+**Imagens:**
+
+![PR #3 aprovada](imagens/2026-09-04/01-pr3-aprovada.png)
+*Aprovacao da PR #3.*
+
+![PR #7 aprovada](imagens/2026-09-04/02-pr7-aprovada.png)
+*Aprovacao da PR #7.*
 
 ---
 
@@ -290,7 +298,16 @@ alternativas/gabarito) ainda precisa ser decidido antes de retomar.
 - Só commitar/mergear a #3 depois dessa decisão — sem abrir PR nova, como
   combinado.
 
-**Imagens:** _(adicionar prints em `imagens/2026-09-08/` quando tiver)_
+**Imagens:**
+
+![PR #9 aprovada](imagens/2026-09-08/01-pr9-aprovada.png)
+*PR #9 aprovada e mergeada.*
+
+![Conflito inicial da PR #3](imagens/2026-09-08/02-pr3-conflito-1.png)
+*Primeiro registro do conflito da PR #3.*
+
+![Segundo registro do conflito da PR #3](imagens/2026-09-08/03-pr3-conflito-2.png)
+*Segundo registro do conflito da PR #3.*
 
 ---
 
@@ -483,7 +500,60 @@ Android; smoke test seguiu restaurado e o link do vídeo corrigido.
 - Verificar se o vídeo de demonstração linkado no README (`youtu.be/ahXdrW6j_UQ`)
   está mesmo acessível/não listado, como o placeholder original pedia.
 
-**Imagens:** _(adicionar prints em `imagens/2026-09-10/` quando tiver)_
+**Imagens:**
+
+![PR #3 aprovada](imagens/2026-09-10/01-pr3-aprovada.png)
+*Aprovacao da PR #3 pelo mantenedor.*
+
+![Resolucao do conflito da PR #3](imagens/2026-09-10/02-pr3-resolucao-conflito.png)
+*Registro da resolucao tecnica do conflito da PR #3.*
+
+![PR #11 aprovada](imagens/2026-09-10/03-pr11-aprovada.png)
+*Aprovacao da PR #11.*
+
+![PR #12 aprovada](imagens/2026-09-10/04-pr12-aprovada.png)
+*Aprovacao da PR #12.*
+
+![PR #14 aprovada](imagens/2026-09-10/05-pr14-aprovada.png)
+*Aprovacao da PR #14.*
+
+---
+
+## 03/10/2026
+
+**O que foi feito:** refatoracao dos modelos de dominio usados no fluxo de
+geracao de provas e abertura da PR #15.
+
+**Como foi feito:**
+- Atualizei a referencia local da `main` com as alteracoes remotas antes de
+  reaplicar o trabalho local.
+- Resolvi os conflitos mantendo as atualizacoes mais recentes da `main` e
+  reaplicando a refatoracao dos modelos.
+- Criei `lib/models/aluno.dart` com `Aluno` e `alunosMock`.
+- Criei `lib/models/versao_prova.dart` com `QuestaoNaVersao` e `VersaoProva`,
+  importando `Questao` de `lib/models/questao.dart`.
+- Atualizei os imports em `app_router.dart`, `pdf_service.dart`,
+  `provas_repository.dart`, `preview_layout_screen.dart` e
+  `gerar_provas_screen.dart`.
+- Criei a branch `refactor/modelos-dominio` baseada na `main` atualizada,
+  fiz o commit `763efac` e publiquei a branch no GitHub.
+- Abri a PR #15 contra `main` e solicitei revisao de `KelciaAntiuk`.
+- Rodei `flutter analyze`, que terminou sem erros.
+
+**Resultado:** PR #15 aberta e aguardando aprovacao. A branch esta limpa,
+alinhada com o remoto e sem alteracoes geradas de plataforma pendentes.
+
+**Prompt da PR:**
+
+_(colar aqui o prompt/descricao da PR)_
+
+**Imagem:**
+
+![PR #15 aberta e revisao solicitada](imagens/2026-10-03/01-pr15-aberta.png)
+*PR #15 aberta no GitHub, com a revisao de `KelciaAntiuk` solicitada.*
+
+**Imagens que ainda faltam neste diario:**
+- Entrada de `10/09/2026`: print do resultado da validacao do APK.
 
 ---
 
