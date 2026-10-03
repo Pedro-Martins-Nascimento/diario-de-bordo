@@ -543,10 +543,6 @@ geracao de provas e abertura da PR #15.
 **Resultado:** PR #15 aberta e aguardando aprovacao. A branch esta limpa,
 alinhada com o remoto e sem alteracoes geradas de plataforma pendentes.
 
-**Prompt da PR:**
-
-_(colar aqui o prompt/descricao da PR)_
-
 **Imagem:**
 
 ![PR #15 aberta e revisao solicitada](imagens/2026-10-03/01-pr15-aberta.png)
