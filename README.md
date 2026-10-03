@@ -220,12 +220,6 @@ em vez de `main` — sem efeito prático, porque o conteúdo dela chega na
 `main` de qualquer forma pela #7, mas fica esse detalhe no histórico do
 GitHub pra quem for conferir depois.
 
-**Pendente:**
-- Registrar os prints das PRs #3 e #7 em `imagens/` quando forem copiados
-  para a pasta local do diario.
-- Revalidar `#3` contra a `main` depois que `#7` for mergeada (as duas
-  mexem em `app_router.dart`, pode surgir conflito novo).
-
 **Imagens:**
 
 ![PR #3 aprovada](imagens/2026-09-04/01-pr3-aprovada.png)
@@ -288,15 +282,6 @@ real — decisão de como resolver ficou pendente.
 sem alterações — o merge de teste foi desfeito, o conflito real entre os
 dois modelos de questões (mock simples com turma/nome vs. modelo real com
 alternativas/gabarito) ainda precisa ser decidido antes de retomar.
-
-**Pendente:**
-- Decidir e aplicar a resolução do conflito da PR #3 (levar o modelo real
-  de `models/questao.dart` para dentro da tela que já tem nome da
-  prova/turma/histórico, sem perder nem o banco de questões novo nem a UI
-  já consolidada).
-- Revalidar com `flutter analyze` e `flutter test` depois da resolução.
-- Só commitar/mergear a #3 depois dessa decisão — sem abrir PR nova, como
-  combinado.
 
 **Imagens:**
 
