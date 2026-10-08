@@ -522,10 +522,11 @@ geracao de provas e abertura da PR #15.
   `gerar_provas_screen.dart`.
 - Criei a branch `refactor/modelos-dominio` baseada na `main` atualizada,
   fiz o commit `763efac` e publiquei a branch no GitHub.
-- Abri a PR #15 contra `main` e solicitei revisao de `KelciaAntiuk`.
+- Abri a PR #15 contra `main`, solicitei revisao de `KelciaAntiuk` e ela foi
+  aprovada e mergeada.
 - Rodei `flutter analyze`, que terminou sem erros.
 
-**Resultado:** PR #15 aberta e aguardando aprovacao. A branch esta limpa,
+**Resultado:** PR #15 aprovada e mergeada na `main`. A branch ficou limpa,
 alinhada com o remoto e sem alteracoes geradas de plataforma pendentes.
 
 **Imagem:**
@@ -533,8 +534,57 @@ alinhada com o remoto e sem alteracoes geradas de plataforma pendentes.
 ![PR #15 aberta e revisao solicitada](imagens/2026-10-03/01-pr15-aberta.png)
 *PR #15 aberta no GitHub, com a revisao de `KelciaAntiuk` solicitada.*
 
+![PR #15 mergeada](imagens/2026-10-03/02-pr15-mergeada.png)
+*PR #15 aprovada pela revisora e mergeada na `main`.*
+
 **Imagens que ainda faltam neste diario:**
 - Entrada de `10/09/2026`: print do resultado da validacao do APK.
+
+---
+
+## 07/10/2026
+
+**O que foi feito:** configuracao inicial do Firebase no projeto Flutter,
+sem alterar telas ou regras de negocio existentes.
+
+**Como foi feito:**
+- Rodei `flutterfire configure`, que gerou `lib/firebase_options.dart`,
+  `android/app/google-services.json` e `firebase.json`.
+- Adicionei `firebase_core`, `firebase_auth` e `cloud_firestore` ao
+  `pubspec.yaml` e rodei `flutter pub get`.
+- Atualizei `lib/main.dart` para executar
+  `WidgetsFlutterBinding.ensureInitialized()` e inicializar o Firebase com
+  `DefaultFirebaseOptions.currentPlatform` antes do `runApp()`.
+- Confirmei que o `.gitignore` ja cobre
+  `lib/firebase_options.dart`, `android/app/google-services.json` e
+  `ios/Runner/GoogleService-Info.plist`, evitando enviar configuracoes
+  sensiveis ao GitHub.
+- Rodei `flutter analyze`, que terminou sem issues.
+- Rodei `flutter build web`; o build terminou com sucesso e gerou
+  `build/web`. O dry-run de WebAssembly exibiu apenas avisos relacionados
+  ao pacote `image`, sem impedir a compilacao Web.
+
+**Resultado:** Firebase configurado para o projeto, dependencias resolvidas
+e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
+
+**Imagens:**
+
+![Configuracao do projeto Firebase](imagens/2026-10-07/01-firebase-config-projeto.png)
+*Configuracao do projeto no Firebase.*
+
+![Configuracao do FlutterFire](imagens/2026-10-07/02-configuracao-firebase.png)
+*Configuracao do Firebase no projeto Flutter.*
+
+**Tambem neste dia - abertura da PR #16:**
+
+- Criei o commit `6e86dcc` com a configuracao do Firebase e publiquei a
+  branch `chore/configurar-firebase`.
+- Abri a PR #16 contra `main` e solicitei revisao de `KelciaAntiuk`.
+- A PR ficou aguardando aprovacao, sem incluir os arquivos sensiveis gerados
+  pelo FlutterFire.
+
+![PR #16 aberta e revisao solicitada](imagens/2026-10-07/03-pr16-aberta.png)
+*PR #16 aberta no GitHub, aguardando aprovacao da revisora.*
 
 ---
 
