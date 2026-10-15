@@ -588,6 +588,81 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ---
 
+## 09/10/2026
+
+**O que foi feito:** aprovação e merge da PR #16 (`chore/configurar-firebase`), integrando a configuração base do Firebase na branch `main`.
+
+**Como foi feito:**
+- A revisora `KelciaAntiuk` concluiu a revisão técnica da PR #16 e aprovou as alterações.
+- O merge foi realizado via squash (`gh pr merge --squash`), respeitando as rulesets do repositório.
+- A branch `main` passou a conter a infraestrutura do Firebase inicializada no Flutter (`firebase_core`, `firebase_auth`, `cloud_firestore`), mantendo os arquivos sensíveis de credenciais devidamente ignorados pelo `.gitignore`.
+
+**Resultado:** PR #16 mergeada na `main` com sucesso.
+
+**Imagens:**
+
+![PR #16 aprovada e mergeada](imagens/2026-10-09/01-pr16-aprovada-mergeada.png)
+*Aprovação da PR #16 pela revisora e squash merge concluído na branch main.*
+
+---
+
+## 14/10/2026
+
+**O que foi feito:** revisão, validação e merge das Pull Requests #17, #18 e #19 na sequência necessária para a entrega da N2 (persistência e autenticação com Firebase):
+1. **PR #17** (`feature/n2-provas-firestore`, autora KarenAmancio): abstração de `ProvaRepository`, mapper e repositório em memória para provas e versões.
+2. **PR #18** (`feat/firestore-security-rules`, autora KelciaAntiuk): regras de segurança do Firestore, injeção de dependência com `Provider` em todas as telas e repositórios de Turmas e Questões.
+3. **PR #19** (`feat/login-firebase-auth`, autora KelciaAntiuk): autenticação via Firebase Auth, proteção de rotas no roteador, botão de logout e testes unitários.
+
+**Como foi feito:**
+
+- **Revisão e merge da PR #17 (`feature/n2-provas-firestore`):**
+  - Avaliada a criação da interface `ProvaRepository` e sua implementação `ProvaRepositoryMemoria`.
+  - Verificada a arquitetura da coleção no Firestore: `professores/{uid}/provas/{provaId}` com subcoleção `versoes` (estratégia que contorna o limite de 1 MiB por documento para provas com muitas versões).
+  - Verificados testes unitários e mapeamentos em `test/prova_mapper_test.dart` e `lib/services/prova_mapper.dart`.
+  - Executados `flutter analyze` e `flutter test` com sucesso.
+  - Aprovada a PR e realizado o squash merge na `main`.
+
+- **Revisão e merge da PR #18 (`feat/firestore-security-rules`):**
+  - Avaliadas as regras de segurança em `firestore.rules` garantindo que cada professor acesse apenas os seus próprios dados (`request.auth.uid == userId`).
+  - Adicionado o pacote `provider` ao `pubspec.yaml` e atualizado `lib/main.dart` com `MultiProvider` para gerenciar os estados de `TurmasRepository`, `QuestoesRepository` e `ProvaRepositoryMemoria`.
+  - Refatoração das telas de Turmas, Questões, Provas, Início e Correção para consumir os repositórios injetados via `Provider`.
+  - Validados os testes em `test/repositorios_test.dart`.
+  - Executados `flutter analyze` e `flutter test`.
+  - Aprovada a PR e realizado o squash merge na `main`.
+
+- **Revisão, apontamento e resolução da PR #19 (`feat/login-firebase-auth`):**
+  - **Revisão inicial e apontamento de pendências:** Na primeira análise da PR #19, solicitei alterações (*changes requested*) pontuando dois itens críticos:
+    1. *Resolução de conflito com a `main`*: após o merge da #18, surgiram divergências em `lib/main.dart`, `lib/screens/inicio/inicio_screen.dart` e `pubspec.lock`. Forneci o passo a passo exato via git para manter as rotas protegidas e a injeção do `AuthService` com o `pubspec.lock` atualizado.
+    2. *Remoção do botão "Entrar com Google"*: o provedor Google não estava ativo no console nem com SHA-1 configurado, o que causaria exceção em tempo de execução. Foi orientado focar na autenticação via e-mail e senha.
+  - **Correções aplicadas pela autora:** A autora realizou o merge da `main` atualizada na branch `feat/login-firebase-auth`, ajustou as dependências e garantiu os mocks do `FirebaseAuth` para testes.
+  - **Validação final:** Com as pendências resolvidas, realizei nova rodada de testes:
+    - `flutter analyze` finalizado sem apontamentos.
+    - `flutter test` concluído com todos os 32 testes passando (incluindo `test/auth_test.dart`).
+  - **Aprovação e merge:** Registrei o review formal aprovando a PR e o merge foi concluído com sucesso.
+
+**Resultado:**
+- A branch `main` agora conta com o ciclo completo de autenticação e persistência:
+  - Rotas protegidas exigindo login via `AuthService`.
+  - Todas as telas integradas com injeção de dependência (`Provider`).
+  - Regras de segurança do Firestore prontas e validadas para produção.
+  - Todos os testes de unidade e integração automatizados passando com cobertura de autenticação e repositórios.
+
+**Imagens:**
+
+![PR #17 aprovada e mergeada](imagens/2026-10-14/01-pr17-aprovada-mergeada.png)
+*Aprovação e merge da PR #17 (migração de provas para ProvaRepository).*
+
+![PR #18 aprovada e mergeada](imagens/2026-10-14/02-pr18-aprovada-mergeada.png)
+*Aprovação e merge da PR #18 (regras de segurança Firestore e migração para Provider).*
+
+![Apontamento de melhorias na PR #19](imagens/2026-10-14/03-pr19-changes-requested.png)
+*Revisão inicial com solicitação de alterações (changes requested) e orientações técnicas para resolução de conflitos na PR #19.*
+
+![PR #19 aprovada e mergeada](imagens/2026-10-14/04-pr19-aprovada-mergeada.png)
+*Aprovação final e merge da PR #19 após validação com 32 testes passando.*
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
