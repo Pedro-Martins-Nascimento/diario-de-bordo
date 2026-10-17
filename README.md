@@ -680,6 +680,25 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ---
 
+## 17/10/2026
+
+**O que foi feito:** revisão, aprovação e merge da PR #21 (`feat/correcoes-firestore`, autor Eduardoszz) na branch `main`: correções, resultados e estatística no Firestore.
+
+**Como foi feito:**
+- Avaliada a implementação do contrato `CorrecaoRepository` com implementações em memória e Firestore (`professores/{uid}/correcoes/{id}`).
+- Verificados os componentes `CorrecaoMapper` e `EstatisticaService`.
+- Validados os testes de contrato rodando em ambas as implementações via `fake_cloud_firestore`.
+- Aprovada a PR (`Pedro-Martins-Nascimento`) e realizado o squash merge do commit `23b6d63` na branch `main`.
+
+**Resultado:** PR #21 aprovada e mergeada na `main`. O fluxo de correção agora conta com persistência no Firestore, cálculo de estatísticas e testes de contrato validados.
+
+**Imagens:**
+
+![PR #21 aprovada e mergeada](imagens/2026-10-17/01-pr21-aprovada-mergeada.png)
+*Aprovação e merge da PR #21 (correções, resultados e estatística no Firestore).*
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
