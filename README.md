@@ -682,20 +682,66 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ## 17/10/2026
 
-**O que foi feito:** revisão, aprovação e merge da PR #21 (`feat/correcoes-firestore`, autor Eduardoszz) na branch `main`: correções, resultados e estatística no Firestore.
+**O que foi feito:** revisão, aprovação e merge das Pull Requests #21, #24, #22 e #23 na branch `main`, além de revisão técnica com solicitação de alterações (*changes requested*) e orientações na PR #25:
+1. **PR #21** (`feat/correcoes-firestore`, autor Eduardoszz): persistência de correções, resultados e estatísticas no Firestore (mergeada).
+2. **PR #24** (`feature/n2-provas-firestore-real`, autora KarenAmancio): implementação real do repositório de provas gravando no Firestore (`ProvaRepositoryFirestore`) (mergeada).
+3. **PR #22** (`feature/n2-pdf-firestore`, autora KarenAmancio): desacoplamento de mocks no PDF e editor de layout, passando dados de prova e alunos por parâmetro e suporte a carregamento por `provaId` (mergeada).
+4. **PR #23** (`feature/n2-relatorio-excel`, autora KarenAmancio): exportação de relatório de notas em formato de planilha Excel (`.xlsx`) (mergeada).
+5. **PR #25** (`Feature/migração turmas-alunos`, autora leparpineli): migração de turmas e alunos para o Firestore (revisada com apontamentos e orientações de cherry-pick).
 
 **Como foi feito:**
-- Avaliada a implementação do contrato `CorrecaoRepository` com implementações em memória e Firestore (`professores/{uid}/correcoes/{id}`).
-- Verificados os componentes `CorrecaoMapper` e `EstatisticaService`.
-- Validados os testes de contrato rodando em ambas as implementações via `fake_cloud_firestore`.
-- Aprovada a PR (`Pedro-Martins-Nascimento`) e realizado o squash merge do commit `23b6d63` na branch `main`.
 
-**Resultado:** PR #21 aprovada e mergeada na `main`. O fluxo de correção agora conta com persistência no Firestore, cálculo de estatísticas e testes de contrato validados.
+- **Revisão e merge da PR #21 (`feat/correcoes-firestore`):**
+  - Avaliada a implementação do contrato `CorrecaoRepository` com implementações em memória e Firestore (`professores/{uid}/correcoes/{id}`).
+  - Verificados os componentes `CorrecaoMapper` e `EstatisticaService`.
+  - Validados os testes de contrato rodando em ambas as implementações via `fake_cloud_firestore`.
+  - Aprovada a PR (`Pedro-Martins-Nascimento`) e realizado o squash merge do commit `23b6d63` na branch `main`.
+
+- **Revisão e merge da PR #24 (`feature/n2-provas-firestore-real`):**
+  - Avaliada a implementação de `ProvaRepositoryFirestore` substituindo a instância temporária em memória (`ProvaRepositoryMemoria`) que era usada na N1/início da N2.
+  - A persistência grava os dados no caminho `professores/{uid}/provas/{provaId}`, salvando as versões na subcoleção `versoes` (com o campo `ordem` para manter a ordenação sequencial `v1, v2, ..., v10`).
+  - Atualizado `MyApp` para receber o repositório do Firestore com o `uid` do professor autenticado e repassar ao `criarRouter`.
+  - Removido `prova_repository_padrao.dart` e ajustado `test/auth_test.dart` para utilizar o repositório em memória nos testes.
+  - Validação de testes: `flutter analyze` sem problemas e suite de testes `flutter test` passando.
+  - Aprovada a PR (`Pedro-Martins-Nascimento`) e realizado o squash merge na branch `main`.
+
+- **Revisão e merge da PR #22 (`feature/n2-pdf-firestore`):**
+  - Adaptação do `PdfService` (`gerarPdfVersao` e `gerarPdfProvas`) para receber a lista de alunos por parâmetro em vez de ler internamente de `alunosMock`.
+  - Evolução de `PreviewLayoutScreen` para receber `PreviewLayoutArgs` (versões e alunos) e inclusão do construtor nomeado `PreviewLayoutScreen.deProva`, permitindo carregar os dados diretamente via `ProvaRepository` caso o usuário acesse ou recarregue a página com `?provaId=`, exibindo feedback de carregamento ou "Prova não encontrada.".
+  - Atualização de `GerarProvasScreen` para repassar os alunos da turma ao exportar PDF ou abrir o editor de layout, enviando o `provaId` na rota caso a prova já esteja salva.
+  - Implementação do helper `alunos_para_pdf.dart` que busca os alunos da turma a partir do `TurmasRepository` (mantendo fallback para dados de teste caso a turma não possua alunos).
+  - Atualização das rotas no `app_router.dart` para suportar argumentos ou query parameter `?provaId=`.
+  - Aprovada a PR (`Pedro-Martins-Nascimento`) e realizado o squash merge do commit `cc3fc16` na branch `main`.
+
+- **Revisão e merge da PR #23 (`feature/n2-relatorio-excel`):**
+  - Avaliada a criação do modelo `LinhaNota` (aluno, prova e nota, tratando nota ausente como célula vazia em vez de zero).
+  - Implementação da função `gerarXlsxNotas(linhas)`, retornando os bytes em formato `.xlsx` estruturados com aba "Notas" e cabeçalho estilizado em negrito, desacoplada da camada de apresentação ou compartilhamento de arquivos.
+  - Validação de qualidade: `flutter analyze` sem problemas e suite `flutter test` passando com 5 novos testes unitários que geram e decodificam o `.xlsx` para validação da integridade dos dados.
+  - Aprovada a PR (`Pedro-Martins-Nascimento`) e realizado o squash merge na branch `main`.
+
+- **Revisão e orientação na PR #25 (`Feature/migração turmas-alunos`):**
+  - Analisei o código da migração: a lógica de salvar na coleção `professores/{uid}/turmas` está correta e atende às regras do Firestore, mantendo `TurmasRepository()` compatível com `main.dart`.
+  - **Identificação do problema:** a branch partiu de um ponto antigo e trouxe commits legados de login e security rules (de 12 a 15/10) que a `main` já absorveu via squash. Isso gerou conflito em `main.dart`, `app_router.dart`, `pubspec.lock`, `pubspec.yaml` e `test/auth_test.dart`.
+  - Como o trabalho autêntico da autora altera somente 2 arquivos (`turma_mapper.dart` e `turmas_repository.dart` no commit `e63a8b1`), deixei comentário na PR com *Changes requested* sugerindo o fluxo mais limpo via `git cherry-pick e63a8b1` a partir da `main` atualizada em uma nova branch (`feat/turmas-firestore`), além de verificar se o cadastro/importação de alunos também já está persistindo no Firestore.
+
+**Resultado:** PRs #21, #24, #22 e #23 aprovadas e mergeadas na `main`. A PR #25 recebeu feedback detalhado e instruções passo a passo para rebase/cherry-pick limpo sem conflitos, aguardando os ajustes da autora para merge final.
 
 **Imagens:**
 
 ![PR #21 aprovada e mergeada](imagens/2026-10-17/01-pr21-aprovada-mergeada.png)
 *Aprovação e merge da PR #21 (correções, resultados e estatística no Firestore).*
+
+![PR #24 aprovada e mergeada](imagens/2026-10-17/02-pr24-aprovada-mergeada.png)
+*Aprovação e merge da PR #24 (persistência real de provas e versões no Firestore).*
+
+![PR #22 aprovada e mergeada](imagens/2026-10-17/03-pr22-aprovada-mergeada.png)
+*Aprovação e merge da PR #22 (PDF e editor de layout recebendo dados por parâmetro e provaId).*
+
+![PR #23 aprovada e mergeada](imagens/2026-10-17/04-pr23-aprovada-mergeada.png)
+*Aprovação e merge da PR #23 (geração de relatório de notas em .xlsx).*
+
+![Comentário e apontamento na PR #25](imagens/2026-10-17/05-pr25-changes-requested.png)
+*Revisão técnica com solicitação de alterações (changes requested) e passo a passo de cherry-pick na PR #25.*
 
 ---
 
