@@ -663,6 +663,23 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ---
 
+## 15/10/2026
+
+**O que foi feito:** aplicação e publicação das regras de segurança do Firestore (*Security Rules*) no Firebase Console.
+
+**Como foi feito:**
+- Verificadas as regras de segurança desenvolvidas para o Firestore (`firestore.rules`), garantindo o isolamento dos dados por professor (`request.auth.uid == userId`).
+- Publicadas as regras diretamente no Firebase Console para garantir a segurança dos acessos no ambiente de desenvolvimento/produção.
+
+**Resultado:** regras de segurança ativas e aplicadas com sucesso no Firebase.
+
+**Imagens:**
+
+![Aplicação das regras do Firebase](imagens/2026-10-15/01-aplicacao-regras-firebase.png)
+*Aplicação e publicação das regras de segurança do Firestore no Firebase Console.*
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
