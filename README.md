@@ -745,6 +745,90 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ---
 
+## 23/10/2026
+
+**O que foi feito:** aprovação e merge da PR #26 (`feat/turmas-firestore`, autora leparpineli): correção do fluxo de importação e adição de alunos e ajuste do router, encerrando o ciclo aberto pela PR #25 (que havia recebido *changes requested* em 17/10 por conflitos gerados de commits legados já absorvidos pela `main`).
+
+**Como foi feito:**
+- A autora aplicou as orientações de cherry-pick deixadas no comentário da PR #25: rebaseou o trabalho autêntico (arquivos `turma_mapper.dart` e `turmas_repository.dart`) a partir da `main` atualizada, na nova branch `feat/turmas-firestore`, eliminando os commits legados de login e security rules que haviam causado os conflitos.
+- Revisei a PR #26 resultante: importação/adição de alunos ajustada e router corrigido, sem conflitos com a `main` atual.
+- Rodei `flutter analyze` (sem apontamentos) e os testes passaram — confirmado no comentário de aprovação registrado na PR.
+- Aprovei a PR (`Pedro-Martins-Nascimento`) com o registro da validação no corpo e realizei o squash merge do commit `c6ff723` na branch `main`.
+
+**Resultado:** PR #26 mergeada na `main` (squash). O fluxo de importação e adição de alunos às turmas está corrigido e persistindo no Firestore, com router ajustado e análise estática passando.
+
+**Imagens:**
+
+![PR #26 aprovada e mergeada](imagens/2026-10-23/01-pr26-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #26 (correção importação/adição de alunos e router) na branch main.*
+
+---
+
+## 23/10/2026 — PR #27
+
+**O que foi feito:** revisão, aprovação e merge da PR #27 (`fix/router-prova-repository`, autora KarenAmancio): correção pontual na rota do editor de layout, que não estava utilizando o repositório de provas recebido pelo router.
+
+**Como foi feito:**
+- Revisei a PR #27 (`fix: rota do editor de layout usa o repositório recebido pelo router` → `main`): 1 arquivo alterado, sem conflito com a `main` atual.
+- A correção garante que a rota do editor de layout (`PreviewLayoutScreen`) passa e consome o `ProvaRepository` injetado pelo router, eliminando a dependência direta de uma instância interna que não refletia o estado correto das provas persistidas no Firestore.
+- Aprovei a PR (`Pedro-Martins-Nascimento`) com o comentário "Aprovado: rota do editor de layout corrigida." e realizei o squash merge na branch `main`.
+
+**Resultado:** PR #27 mergeada na `main` (squash). O editor de layout agora opera sempre com o repositório correto fornecido pelo router, fechando a inconsistência de estado introduzida pela integração real com o Firestore.
+
+**Imagens:**
+
+![PR #27 aprovada e mergeada](imagens/2026-10-23/02-pr27-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #27 (fix: rota do editor de layout usa o repositório recebido pelo router).*
+
+---
+
+## 23/10/2026 — PR #28
+
+**O que foi feito:** revisão, aprovação e merge da PR #28 (`test/n2-prova-repository-firestore`, autora KarenAmancio): testes do `ProvaRepository` na implementação real do Firestore e correção no editor de layout (editar prova não apagava versões que continuam existindo).
+
+**Como foi feito:**
+- Revisei a PR #28 (`test: cobre o ProvaRepository do Firestore e corrige o editor` → `main`): 4 commits, 6 arquivos alterados (+288 / -162).
+- Os 4 commits entregues:
+  1. `fix: rota do editor de layout usa o repositório recebido pelo router` (`9f049c6`) — complementar ao fix da PR #27.
+  2. `fix: editar prova no Firestore não apaga as versões que continuam` (`d214f01`) — correção de bug real na persistência.
+  3. `test: roda os mesmos testes do ProvaRepository na versão do Firestore` (`9450607`) — suite de testes de contrato validando a implementação real.
+  4. `test: editor de layout aberto só com o id da prova` (`f339957`) — teste de carregamento da tela por `provaId`.
+- Validados os testes e análise estática antes de aprovar.
+- Aprovei a PR (`Pedro-Martins-Nascimento`) com o comentário "Aprovado: testes de ProvaRepository no Firestore e correção no editar." e realizei o squash merge (4 commits) na branch `main`.
+
+**Resultado:** PR #28 mergeada na `main` (squash). O repositório de provas do Firestore passou a ter cobertura de testes de contrato equivalente à implementação em memória, e o bug de apagar versões ao editar uma prova foi corrigido.
+
+**Imagens:**
+
+![PR #28 aprovada e mergeada](imagens/2026-10-23/03-pr28-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #28 (testes do ProvaRepository no Firestore e correção no editor de layout).*
+
+---
+
+## 23/10/2026 — PR #29
+
+**O que foi feito:** revisão, aprovação e merge da PR #29 (`feature/n2-exportar-notas`, autora KarenAmancio): integração completa da exportação de notas da prova em Excel (`.xlsx`) pelo histórico de provas, fechando o passo 3 da PR #13.
+
+**Como foi feito:**
+- Revisei a PR #29 (`Feature/n2 exportar notas` → `main`): 4 commits, 8 arquivos alterados (+469 / -14).
+- Os 4 commits entregues:
+  1. `fix: rota do editor de layout usa o repositório recebido pelo router` (`df529f4`) — fix complementar (mesmo padrão das PRs #27 e #28).
+  2. `feat: monta as linhas do relatório de notas a partir das correções` (`5723e23`) — monta `List<LinhaNota>` a partir das correções armazenadas no Firestore.
+  3. `feat: salva a planilha de notas pelo seletor de arquivos` (`9439f33`) — usa o seletor nativo de arquivos para escolher onde salvar o `.xlsx`.
+  4. `feat: exporta as notas da prova em Excel pelo histórico` (`95f022d`) — botão de exportação integrado à tela de histórico de provas, ligando o relatório Excel ao app.
+- A autora descreveu a PR como "Fecha o passo 3 da #13: liga o relatório em Excel ao app."
+- Validados os testes e análise estática antes de aprovar.
+- Aprovei a PR (`Pedro-Martins-Nascimento`) com o comentário "Aprovado: exportação de notas da prova em Excel pelo histórico." e realizei o squash merge (4 commits) na branch `main`.
+
+**Resultado:** PR #29 mergeada na `main` (squash). O fluxo de exportação de notas em `.xlsx` está completo e integrado ao histórico de provas: o professor acessa o histórico, seleciona uma prova e exporta a planilha de notas diretamente para o dispositivo.
+
+**Imagens:**
+
+![PR #29 aprovada e mergeada](imagens/2026-10-23/04-pr29-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #29 (exportação de notas da prova em Excel pelo histórico).*
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
