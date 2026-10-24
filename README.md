@@ -829,6 +829,35 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ---
 
+## 24/10/2026 — PR #30
+
+**O que foi feito:** desenvolvimento, testes, aprovação e merge da PR #30 (`feat/questoes-firestore`, autor Pedro-Martins-Nascimento): migração completa do banco de questões para o Cloud Firestore com suporte a tempo real, serialização com mapper, tratamento de estado vazio e testes unitários.
+
+**Como foi feito:**
+- Criei a branch `feat/questoes-firestore` a partir da `main` atualizada e implementei a persistência no Firestore:
+  1. `feat: adiciona QuestaoMapper para serializacao no Firestore` (`7b3a4af`): criação do mapper para conversão entre o modelo `Questao` e os documentos do Firestore (`toMap`/`fromMap`).
+  2. `feat: migra QuestoesRepository para o Firestore com suporte a tempo real` (`d9f635b`): migração da camada de dados para gravar e consultar na coleção de questões sob o escopo do professor autenticado (`professores/{uid}/questoes`), com atualização reativa em tempo real via streams do Firestore.
+  3. `feat: adiciona estado vazio para lista de materias` (`91bf78e`): melhoria na interface para exibir mensagem informativa e amigável quando não houver matérias ou questões cadastradas.
+  4. `test: adiciona testes unitarios do QuestoesRepository no Firestore` (`1a67c2e`): cobertura de testes unitários automatizados validando operações de CRUD no repositório.
+- Checklist e validações cumpridas:
+  - `flutter analyze` finalizado sem apontamentos.
+  - `flutter test` passando 100%.
+  - Remoção dos dados mock: com a transição para o banco real, as 48 questões mockadas deixaram de ser carregadas por padrão, passando a exibir o estado vazio até que novas questões sejam cadastradas.
+- Abri a PR #30, atribuí a revisão para `KelciaAntiuk` que avaliou e aprovou as alterações.
+- Realizei o squash merge do commit `ccb06b1` na branch `main`.
+
+**Resultado:** PR #30 aprovada e mergeada na `main` com sucesso. O módulo de questões agora opera 100% integrado ao Firebase Firestore, isolado por professor, com reatividade em tempo real e testes unitários garantindo a estabilidade.
+
+**Imagens:**
+
+![Commits e checklist da PR #30](imagens/2026-10-24/01-pr30-commits-abertura.png)
+*Commits da PR #30, checklist de validação e notas sobre a migração de mocks para Firestore.*
+
+![PR #30 aprovada e mergeada](imagens/2026-10-24/02-pr30-aprovada-mergeada.png)
+*Aprovação da revisora KelciaAntiuk e squash merge da PR #30 na branch main.*
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
