@@ -858,6 +858,89 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ---
 
+## 25/10/2026 — PR #32
+
+**O que foi feito:** revisão, aprovação e merge da PR #32 (`feature/n2-boletim-estatistica`, autora KarenAmancio): implementação da geração de boletim em PDF (individual por aluno e em lote para todos os corrigidos) e criação da tela analítica de estatísticas da turma.
+
+**Como foi feito:**
+- Revisei a PR #32 (`Feature/n2 boletim estatistica` → `main`): 2 commits, 8 arquivos alterados (+545 / -46).
+- Os 2 commits entregues:
+  1. `feat: boletim em PDF do aluno e de todos os corrigidos` (`0d6cd85`): serviço de geração de boletim de desempenho individual em PDF para o aluno e funcionalidade de exportação em lote de todos os boletins dos alunos com avaliações corrigidas.
+  2. `feat: tela de estatistica completa da turma` (`93e2a6c`): tela dedicada com métricas e visualização estatística completa da turma (distribuição de notas, médias e aproveitamento) a partir dos dados do Firestore.
+- Validação técnica e testes concluídos sem apontamentos.
+- Aprovei formalmente a PR (`Pedro-Martins-Nascimento`) com o comentário "LGTM" e realizei o squash merge do commit `b65a230` na branch `main`.
+
+**Resultado:** PR #32 mergeada na `main` (squash). O sistema agora oferece relatórios em PDF individuais e consolidados de desempenho dos alunos (boletins), além de uma visão analítica detalhada com estatísticas de aproveitamento por turma.
+
+**Imagens:**
+
+![PR #32 aprovada e mergeada](imagens/2026-10-25/01-pr32-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #32 (boletim em PDF e tela de estatísticas da turma).*
+
+---
+
+## 25/10/2026 — PR #33
+
+**O que foi feito:** revisão, aprovação e merge da PR #33 (`feature/n2-correcao-resultados`, autora KarenAmancio): fluxo completo de correção de provas via QR Code, cálculo de pontuação, persistência no Firestore e atualização do dashboard de Início com métricas em tempo real.
+
+**Como foi feito:**
+- Revisei a PR #33 (`Feature/n2 correcao resultados` → `main`): 6 commits, 15 arquivos alterados (+1.020 / -77).
+- Principais entregas da PR:
+  1. `feat: acha a versão da prova pelo QR lido na folha` (`6b901f2`): decodificação dinâmica da versão e gabarito da avaliação a partir do payload do QR Code lido pela câmera.
+  2. `feat: repositório de correções do professor logado` (`9f76290`): persistência no Firestore sob a coleção do professor (`professores/{uid}/correcoes`).
+  3. `feat: telas de resultado e de histórico das correções` (`4e0645f`): interface com o detalhamento das respostas corrigidas e listagem cronológica do histórico de correções.
+  4. `feat: corrige a folha lida pelo QR e salva a nota no Firestore` (`eb5b1c3`): processamento automático de acertos/erros e gravação do resultado.
+  5. `feat: Início mostra corrigidas, pendentes, média e erro por matéria` (`e15d1fb`): conexão das métricas do repositório de correções com o painel da tela inicial.
+- Validação técnica e testes executados com sucesso.
+- Aprovei formalmente a PR (`Pedro-Martins-Nascimento`) com o comentário "LGTM" e realizei o squash merge do commit `35de8ea` na branch `main`.
+
+**Resultado:** PR #33 mergeada na `main` (squash). A funcionalidade central de correção automatizada por câmera/QR Code está plenamente integrada ao Firestore, alimentando os dados da tela inicial e o histórico de avaliações.
+
+**Imagens:**
+
+![PR #33 aprovada e mergeada](imagens/2026-10-25/02-pr33-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #33 (fluxo de correção por QR Code, resultados e integração com o dashboard).*
+
+---
+
+## 25/10/2026 — PR #34
+
+**O que foi feito:** revisão, aprovação e merge da PR #34 (`feature/n2-selo-pendentes`, autora KarenAmancio): inclusão do selo indicador de provas pendentes de correção na aba "Corrigir".
+
+**Como foi feito:**
+- Revisei a PR #34 (`Feature/n2 selo pendentes` → `main`): 1 commit, 6 arquivos alterados (+198 / -18).
+- Commit entregue: `feat: selo de pendentes na aba Corrigir` (`af926c7`), criando um badge visual que computa e sinaliza em destaque a quantidade de provas que ainda aguardam leitura e correção.
+- Validados os testes e a consistência visual da interface.
+- Aprovei formalmente a PR (`Pedro-Martins-Nascimento`) com o comentário "LGTM" e realizei o squash merge do commit `cb98337` na branch `main`.
+
+**Resultado:** PR #34 mergeada na `main` (squash). A aba Corrigir agora exibe feedback visual imediato sobre pendências de correção para o professor.
+
+**Imagens:**
+
+![PR #34 aprovada e mergeada](imagens/2026-10-25/03-pr34-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #34 (indicador/selo de pendências de correção na aba Corrigir).*
+
+---
+
+## 25/10/2026 — PR #35
+
+**O que foi feito:** revisão, aprovação e merge da PR #35 (`fix/salvar-planilha-web`, autora KarenAmancio): ajuste no feedback de salvamento de relatório Excel no ambiente Web.
+
+**Como foi feito:**
+- Revisei a PR #35 (`fix: exportar notas no navegador mostra o aviso de planilha salva` → `main`): 2 commits, 1 arquivo alterado (+4 / -3).
+- Commit entregue: `fix: exportar notas no navegador mostra o aviso de planilha salva` (`97432ad`), assegurando que a mensagem de confirmação (aviso de sucesso) seja acionada após o download da planilha pelo navegador.
+- Validação executada no target Web.
+- Aprovei formalmente a PR (`Pedro-Martins-Nascimento`) com o comentário "LGTM" e realizei o squash merge do commit `97a2e6f` na branch `main`.
+
+**Resultado:** PR #35 mergeada na `main` (squash). O download de planilhas de notas na versão Web agora fornece o feedback visual adequado de conclusão da operação.
+
+**Imagens:**
+
+![PR #35 aprovada e mergeada](imagens/2026-10-25/04-pr35-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #35 (aviso de planilha salva no navegador ao exportar notas).*
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
