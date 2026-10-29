@@ -941,6 +941,31 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ---
 
+## 27/10/2026 — PR #36
+
+**O que foi feito:** revisão, aprovação e merge da PR #36 (`ajustes-erros-gerais`, autora KelciaAntiuk): ajustes gerais de autenticação com Google nativo no Android, eliminação completa de dados mock residuais (Início, Gerar Provas, Correção e exportação de alunos), retorno de instância na criação de matérias e documentação abrangente da entrega N2 no README do projeto.
+
+**Como foi feito:**
+- Revisei a PR #36 (`Ajustes erros gerais` → `main`): 6 commits, 13 arquivos alterados (+264 / -138).
+- Os 6 commits entregues:
+  1. `auth` (`22f62e3`): adição da dependência `google_sign_in: ^7.2.0` e implementação do login nativo com Google no Android via `GoogleSignIn.instance.initialize(serverClientId: ...)` e `authenticate()`, evitando que no Android a autenticação passe pelo navegador e perca o estado da sessão ao usar navegadores alternativos, além de tratar cancelamento pelo usuário e exceções específicas.
+  2. `auth` (`aa9fa88`): ajustes no fluxo de logout (`GoogleSignIn.instance.signOut()`) para garantir que o próximo login não reutilize a mesma conta automaticamente sem perguntar ao usuário.
+  3. `remove mock` (`bdf25bd`): remoção de dados mockados em `InicioScreen` (tratamento de lista vazia com mensagem "Nenhuma prova gerada ainda." em vez de exibir provas fictícias de `_provasMock`), em `GerarProvasScreen` (turma vazia não injeta mais `alunosMock`) e em `alunos_para_pdf.dart` (retorna lista vazia em vez de cair nos dados de teste).
+  4. `testes` (`a222a54`): atualização dos testes unitários para refletir a remoção dos mocks (`test/alunos_para_pdf_test.dart`), injeção de função de token simulado nos testes de autenticação (`test/auth_test.dart`) e novo teste unitário em `test/repositorios_test.dart` validando retorno da matéria criada.
+  5. `remove mock` (`fdfd565`): remoção do contador mock fixo `_jaCorrigidas = 12` na `CorrigirScreen`, substituído pelo cálculo real e reativo conectando streams de provas e correções com `contarPendentes(_provas, _correcoes)`, exibindo "Tudo corrigido" ao finalizar; ajuste em `QuestoesRepository.criarMateria` para retornar a `Materia` criada, permitindo seleção imediata da nova matéria em `CriarProvaScreen`.
+  6. `update read me` (`5d62326`): reformulação do `README.md` do projeto `flutter_dart` para o escopo da entrega N2, atualizando o status de todos os requisitos (RF01 a RF15), o guia passo a passo de configuração do Firebase (`flutterfire configure`), o cadastro de chaves SHA-1 para login Google no Android (`firebase apps:android:sha:create`), o deploy de regras do Firestore e o processo de geração do APK de release.
+- Validação técnica e testes unitários executados com sucesso (`flutter analyze` e `flutter test` passando 100%).
+- Aprovei formalmente a PR (`Pedro-Martins-Nascimento`) e realizei o squash merge dos 6 commits (commit consolidado `43b66ea`) na branch `main`.
+
+**Resultado:** PR #36 mergeada na `main` (squash). O aplicativo teve seus últimos dados mock eliminados, a autenticação Google nativa no Android estabilizada, a contagem de provas corrigidas corrigida para tempo real e a documentação técnica da entrega N2 completamente atualizada.
+
+**Imagens:**
+
+![PR #36 aprovada e mergeada](imagens/2026-10-27/01-pr36-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #36 (ajustes gerais de erros, remoção de mocks, auth Google e documentação N2).*
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
