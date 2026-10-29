@@ -208,7 +208,7 @@ resolvendo os conflitos reais encontrados no caminho.
   contorna isso. Pedi review pra `KelciaAntiuk` nas PRs #7 e #3.
 - As PRs #3 e #7 foram aprovadas: uma foi aprovada por mim e a outra, que
   era de minha autoria, recebeu aprovação da revisão.
-- Cheguei a criar uma PR de diário de bordo dentro do próprio repositório
+- Cheguei a criar uma PR de diário de bordo (PR #8) dentro do próprio repositório
   `flutter_dart` (`docs/diario-de-bordo.md`), mas o diário de bordo é essa
   pasta local mesmo — fechei a PR e apaguei o arquivo/branch de lá.
 
@@ -403,6 +403,7 @@ de mergear.
   em telas largas, bottom nav em estreitas). Também relaxou o modelo
   `Questao` pra aceitar de 2 a 8 alternativas (antes travado em
   exatamente 4), pra combinar com o novo formulário.
+  (A PR #10, `Feat/home screen and responsiveness`, foi encerrada sem merge porque todo o seu trabalho foi integrado nesta PR #12).
 - **Achado sério antes de validar:** um dos commits da própria PR
   (`chore(testes): remove os arquivos de teste`) apagava o único arquivo
   de teste do projeto (`test/widget_test.dart`) inteiro, sem nenhum
@@ -941,6 +942,25 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ![PR #35 aprovada e mergeada](imagens/2026-10-25/04-pr35-aprovada-mergeada.png)
 *Aprovação e squash merge da PR #35 (aviso de planilha salva no navegador ao exportar notas).*
+
+---
+
+## 25/10/2026 — PR #31
+
+**O que foi feito:** aprovação e merge da PR #31 (`feat/testes-turmas`, autora leparpineli, revisora KelciaAntiuk): implementação de testes unitários ampliados para repositórios de turmas e inclusão de fallback para usuário em modo de desenvolvimento no `main.dart`.
+
+**Como foi feito:**
+- A autora abriu a PR #31 a partir da branch `feat/testes-turmas`:
+  1. `lib/main.dart`: adicionada proteção contra nulo (`_auth.usuario?.uid ?? 'dev_professor'`), evitando que o app dispare exceções ao ser executado em ambiente de desenvolvimento sem sessão ativa.
+  2. `test/repositorios_test.dart`: adição de novos casos de teste unitários para o repositório de turmas, cobrindo cenários de borda (turma recém-criada, importação em lote de alunos e resiliência a IDs inexistentes).
+- Revisão formal e aprovação realizadas por `KelciaAntiuk`.
+- Realizado o squash merge do commit `c872f89` na branch `main`.
+
+**Resultado:** PR #31 mergeada na `main` (squash). A cobertura de testes automatizados do módulo de turmas foi ampliada e a inicialização do app ganhou resiliência contra nulos quando sem usuário autenticado.
+
+**Imagens:**
+
+*(Print da aprovação/merge da PR #31 pendente de adição)*
 
 ---
 
