@@ -557,9 +557,6 @@ alinhada com o remoto e sem alteracoes geradas de plataforma pendentes.
 ![Aprovação e merge da PR #15](imagens/2026-10-03/03-pr15-approve-and-merge.png)
 *Registro de aprovação e squash merge da PR #15.*
 
-**Imagens que ainda faltam neste diario:**
-- Entrada de `10/09/2026`: print do resultado da validacao do APK.
-
 ---
 
 ## 07/10/2026
