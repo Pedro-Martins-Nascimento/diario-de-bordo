@@ -136,7 +136,7 @@ O `git merge-tree` mostrou que o conflito de #1 e #3 é só em `lib/main.dart`:
 a limpeza de comentários já feita em `main` (commit `4c98a3a`) mexeu no mesmo
 trecho que a #1 reescreveu para usar `MaterialApp.router`.
 
-**Resultado / decisão:** as PRs não são independentes, formam uma cadeia:
+**Resultado:** as PRs não são independentes, formam uma cadeia:
 `main` ← `tela-provas` (#1) ← `tela-login` (#4) ← `main-shell` (#5), com
 `questoes` (#3) derivada de `tela-provas` mas mirando `main` direto (por
 isso já carrega o commit da #1 dentro dela). Também achei uma branch órfã
@@ -529,13 +529,16 @@ geracao de provas e abertura da PR #15.
 **Resultado:** PR #15 aprovada e mergeada na `main`. A branch ficou limpa,
 alinhada com o remoto e sem alteracoes geradas de plataforma pendentes.
 
-**Imagem:**
+**Imagens:**
 
 ![PR #15 aberta e revisao solicitada](imagens/2026-10-03/01-pr15-aberta.png)
 *PR #15 aberta no GitHub, com a revisao de `KelciaAntiuk` solicitada.*
 
 ![PR #15 mergeada](imagens/2026-10-03/02-pr15-mergeada.png)
 *PR #15 aprovada pela revisora e mergeada na `main`.*
+
+![Aprovação e merge da PR #15](imagens/2026-10-03/03-pr15-approve-and-merge.png)
+*Registro de aprovação e squash merge da PR #15.*
 
 **Imagens que ainda faltam neste diario:**
 - Entrada de `10/09/2026`: print do resultado da validacao do APK.
@@ -663,9 +666,9 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ---
 
-## 15/10/2026
+## 15/10/2026 — PR #20
 
-**O que foi feito:** aplicação e publicação das regras de segurança do Firestore (*Security Rules*) no Firebase Console.
+**O que foi feito:** aplicação e publicação das regras de segurança do Firestore (*Security Rules*) no Firebase Console e aprovação/merge da PR #20 (`feat/firestore-security-rules`, autora KelciaAntiuk).
 
 **Como foi feito:**
 - Verificadas as regras de segurança desenvolvidas para o Firestore (`firestore.rules`), garantindo o isolamento dos dados por professor (`request.auth.uid == userId`).
