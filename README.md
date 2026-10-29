@@ -11,7 +11,15 @@ imagem.
 
 ---
 
-## Minhas tarefas
+📌 Sumário e Navegação Rápida
+
+- [📌 Sumário e Navegação Rápida](#-sumário-e-navegação-rápida)
+- [🎯 Divisão das Entregas - N1 vs N2](#divisão-das-entregas---n1-vs-n2)
+- [🚀 Etapa N1 - 25/08/2026 a 10/09/2026](#etapa-n1---25082026-a-10092026)
+- [🔥 Etapa N2 - A partir de 03/10/2026](#etapa-n2---a-partir-de-03102026)
+
+---
+## Divisão das Entregas - N1 vs N2
 
 | Fase | Tarefa | PR / evidência | Status |
 |---|---|---|---|
@@ -27,7 +35,7 @@ imagem.
 
 ---
 
-## 25/08 e 26/08/2026
+## Etapa N1 - 25/08/2026 a 10/09/2026
 
 **O que foi feito:** criação do repositório `flutter_dart` no GitHub e
 configuração da proteção da branch `main`, antes de qualquer código entrar
@@ -107,7 +115,7 @@ alguns dias depois)*
 
 ---
 
-## 03/09/2026
+## Etapa N2 - A partir de 03/10/2026
 
 **O que foi feito:** análise das Pull Requests abertas no repositório
 `flutter_dart` para decidir a estratégia de merge (mergear tudo e depois
