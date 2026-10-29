@@ -11,6 +11,22 @@ imagem.
 
 ---
 
+## Minhas tarefas
+
+| Fase | Tarefa | PR / evidência | Status |
+|---|---|---|---|
+| N1 | Criar e configurar o repositório no GitHub | entrada de 25/08 e 26/08 | Concluída |
+| N1 | Configurar regras do repositório (branch protection) | entrada de 25/08 e 26/08 | Concluída |
+| N2 | Configurar projeto Firebase (Firestore + Auth) | PR #16 | Concluída |
+| N2 | Extrair `VersaoProva`/`Aluno` para `lib/models/` | PR #15 | Concluída |
+| N2 | Migrar matérias e questões para o Firestore | PR #30 | Concluída |
+| N2 | README v2 (revisão e merge das PRs da Kelcia) | PRs #36 e #37 | Concluída |
+| N2 | Revisão e aprovação das PRs do grupo | PRs #17 a #19, #21 a #29, #32 a #35 | Concluída |
+| N2 | Gerar e testar o APK final | a registrar | Concluída |
+| N2 | Manter o diário de bordo | este repositório | Contínua |
+
+---
+
 ## 25/08 e 26/08/2026
 
 **O que foi feito:** criação do repositório `flutter_dart` no GitHub e
@@ -682,6 +698,9 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 ![Aplicação das regras do Firebase](imagens/2026-10-15/01-aplicacao-regras-firebase.png)
 *Aplicação e publicação das regras de segurança do Firestore no Firebase Console.*
 
+![PR #20 aprovada e mergeada](imagens/2026-10-15/02-pr20-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #20 (regras de segurança do Firestore e login).*
+
 ---
 
 ## 17/10/2026
@@ -960,7 +979,8 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 **Imagens:**
 
-*(Print da aprovação/merge da PR #31 pendente de adição)*
+![PR #31 aprovada e mergeada](imagens/2026-10-25/05-pr31-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #31 (testes de turmas).*
 
 ---
 
