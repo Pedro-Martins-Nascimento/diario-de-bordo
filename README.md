@@ -989,6 +989,26 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ---
 
+## 29/10/2026 — PR #37
+
+**O que foi feito:** revisão, aprovação e merge da PR #37 (`update readme`, autora KelciaAntiuk): reformulação completa do `README.md` do projeto `flutter_dart` para a entrega N2, com prints de todas as telas do app.
+
+**Como foi feito:**
+- Revisei a PR #37 (`update readme` → `main`): 2 commits, 13 arquivos alterados (+333 / -106), apenas documentação (nenhum arquivo `.dart` alterado).
+- Os 2 commits entregues:
+  1. `update readme` (`47444ad`): README reestruturado com cabeçalho e badges, tabela da equipe, sumário e seções numeradas: Visão Geral (N2 atual e N1), Requisitos (RF e RNF), Telas do Sistema, Modelo de Dados, Stack, Estrutura de Pastas, Como Executar (incluindo configuração do Firebase, cadastro da SHA-1 para o login com Google no Android e geração do APK), Backlog de Atividades da N2 por integrante, Como o grupo trabalha e Documentação de apoio. Também adicionou 12 prints em `docs/telas/` (login, início, turmas, detalhe da turma, questões, nova prova, gerar versões, corrigir, corrigir versão, resultado, estatística e corrigidas).
+  2. `padronizando` (`5ddde76`): padronização do texto e da formatação do README.
+- Aprovei formalmente a PR (`Pedro-Martins-Nascimento`) e realizei o squash merge dos 2 commits (commit consolidado `ca29b88`) na branch `main`.
+
+**Resultado:** PR #37 mergeada na `main` (squash) em 29/10/2026. A documentação da entrega N2 ficou completa, com os requisitos atualizados, o guia de configuração e execução do projeto e as telas ilustradas.
+
+**Imagens:**
+
+![PR #37 aprovada e mergeada](imagens/2026-10-29/01-pr37-aprovada-mergeada.png)
+*Aprovação e squash merge da PR #37 (atualização do README e prints das telas).*
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
