@@ -33,7 +33,8 @@ imagem.
 | N2 | Revisão e aprovação das PRs do grupo | PRs #17 a #19, #21 a #29, #32 a #35 | Concluída |
 | N2 | Gerar e testar o APK final | a registrar | Concluída |
 | N2 | Manter o diário de bordo | este repositório | Contínua |
-| N3 | Evitar que questões sejam cortadas entre páginas no PDF (RNF04) | PR #39 | Em andamento |
+| N3 | Evitar que questões sejam cortadas entre páginas no PDF (RNF04) | PR #39 | Concluída |
+| N3 | Validar foco, iluminação e marcadores antes da correção | PR #40 | Concluída |
 
 ---
 
@@ -1072,6 +1073,36 @@ do squash merge.
 
 ![PR #39 com solicitações de alteração](imagens/2026-11-12/01-pr39-changes-requested.png)
 *Revisão da PR #39 com as duas correções solicitadas antes do merge.*
+
+---
+
+## 12/11/2026 — PR #40
+
+**O que foi feito:** revisão, aprovação e merge da PR #40
+(`feat: check focus, lighting and markers before grading the sheet`, autora
+KelciaAntiuk), dando continuidade à entrega N3. A alteração valida a
+qualidade da imagem da folha antes de iniciar a correção por QR Code,
+verificando foco, iluminação e presença dos marcadores da folha.
+
+**Como foi feito:**
+- Revisei a PR #40 (`feat/validate-image-quality` → `main`), com 2 commits
+  e 7 arquivos alterados.
+- A implementação adicionou a validação prévia da imagem no fluxo da tela
+  **Corrigir**, evitando processar folhas com qualidade insuficiente ou
+  marcadores ausentes.
+- A PR recebeu uma correção de revisão no segundo commit:
+  `fix: address review on photo quality check`.
+- Executei os testes específicos e a análise estática; ambos passaram.
+- Aprovei formalmente a PR e realizei o merge na `main` em 12/11/2026.
+
+**Resultado:** PR #40 aprovada e mergeada na `main`. O fluxo de correção
+passou a rejeitar antecipadamente imagens inadequadas, dando mais segurança
+para a leitura dos marcadores e para o processamento das folhas.
+
+**Imagens:**
+
+![PR #40 aprovada e mergeada](imagens/2026-11-12/02-pr40-aprovada-mergeada.png)
+*Aprovação e merge da PR #40 após a validação da implementação.*
 
 ---
 
