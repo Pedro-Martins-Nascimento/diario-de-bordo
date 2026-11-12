@@ -33,7 +33,7 @@ imagem.
 | N2 | Revisão e aprovação das PRs do grupo | PRs #17 a #19, #21 a #29, #32 a #35 | Concluída |
 | N2 | Gerar e testar o APK final | a registrar | Concluída |
 | N2 | Manter o diário de bordo | este repositório | Contínua |
-| N3 | Evitar que questões sejam cortadas entre páginas no PDF (RNF04) | PR #39 | Concluída |
+| N3 | Evitar que questões sejam cortadas entre páginas no PDF (RNF04) | PR #39 | Em andamento |
 | N3 | Validar foco, iluminação e marcadores antes da correção | PR #40 | Concluída |
 
 ---
@@ -1063,11 +1063,10 @@ alternativas, inteira na mesma página do PDF sempre que ela couber na área
   erros genéricos com `catch (Exception)` e manter as questões normais
   inseparáveis mesmo quando houver uma questão excepcionalmente alta.
 
-**Resultado:** a N3 foi iniciada e a PR #39 está aberta para correções
-solicitadas na revisão. O requisito de não cortar questões comuns entre
-páginas já está coberto pela primeira implementação, mas o fallback para
-questões excepcionalmente altas precisa ser isolado antes da aprovação e
-do squash merge.
+**Resultado:** a N3 foi iniciada e a PR #39 continua aberta para correções
+solicitadas na revisão. O fallback para questões excepcionalmente altas ainda
+precisa ser isolado antes da aprovação e do squash merge; a PR #40 foi
+desenvolvida e mergeada separadamente, sem concluir a PR #39.
 
 **Imagens:**
 
