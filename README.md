@@ -1105,6 +1105,38 @@ para a leitura dos marcadores e para o processamento das folhas.
 
 ---
 
+## 12/11/2026 — PR #41
+
+**O que foi feito:** revisão, aprovação e merge da PR #41
+(`feat: sign-up screen`, autora KelciaAntiuk), com a criação da tela de
+cadastro de professores em `/cadastro` e integração ao Firebase
+Authentication.
+
+**Como foi feito:**
+- Revisei a PR #41 (`feat/criar-usuario` → `main`), com 2 commits e
+  6 arquivos alterados.
+- A implementação adicionou os campos de nome, e-mail, senha e confirmação
+  de senha, todos com validação.
+- O cadastro cria a conta no Firebase Authentication e salva o nome no
+  perfil do usuário.
+- Foram incluídas mensagens para e-mail já cadastrado, senha fraca e
+  ausência de conexão, além dos links de navegação entre login e cadastro.
+- O estilo e as validações dos campos foram compartilhados entre as telas
+  de login e cadastro, com testes de widget para o fluxo.
+- Verifiquei a implementação, as validações, a integração com Firebase e
+  os testes. A PR foi aprovada e mergeada na `main` em 12/11/2026.
+
+**Resultado:** PR #41 aprovada e mergeada na `main`. O aplicativo agora
+possui fluxo de criação de conta para professores, com validação dos dados,
+mensagens de erro e persistência do perfil no Firebase Authentication.
+
+**Imagens:**
+
+![PR #41 aprovada e mergeada](imagens/2026-11-12/03-pr41-aprovada-mergeada.png)
+*Aprovação e merge da PR #41, com a tela de cadastro de professor.*
+
+---
+
 <!--
 Modelo para novas entradas — copiar e preencher:
 
