@@ -14,12 +14,13 @@ imagem.
 📌 Sumário e Navegação Rápida
 
 - [📌 Sumário e Navegação Rápida](#-sumário-e-navegação-rápida)
-- [🎯 Divisão das Entregas - N1 vs N2](#divisão-das-entregas---n1-vs-n2)
+- [🎯 Divisão das Entregas - N1, N2 e N3](#divisão-das-entregas---n1-n2-e-n3)
 - [🚀 Etapa N1 - 25/08/2026 a 10/09/2026](#etapa-n1---25082026-a-10092026)
 - [🔥 Etapa N2 - A partir de 03/10/2026](#etapa-n2---a-partir-de-03102026)
+- [🧪 Etapa N3 - A partir de 09/11/2026](#etapa-n3---a-partir-de-09112026)
 
 ---
-## Divisão das Entregas - N1 vs N2
+## Divisão das Entregas - N1, N2 e N3
 
 | Fase | Tarefa | PR / evidência | Status |
 |---|---|---|---|
@@ -32,6 +33,7 @@ imagem.
 | N2 | Revisão e aprovação das PRs do grupo | PRs #17 a #19, #21 a #29, #32 a #35 | Concluída |
 | N2 | Gerar e testar o APK final | a registrar | Concluída |
 | N2 | Manter o diário de bordo | este repositório | Contínua |
+| N3 | Evitar que questões sejam cortadas entre páginas no PDF (RNF04) | PR #39 | Em andamento |
 
 ---
 
@@ -1031,6 +1033,45 @@ e compilacao Web validada. Nenhuma tela ou logica existente foi alterada.
 
 ![PR #37 aprovada e mergeada](imagens/2026-10-29/01-pr37-aprovada-mergeada.png)
 *Aprovação e squash merge da PR #37 (atualização do README e prints das telas).*
+
+---
+
+## Etapa N3 - A partir de 09/11/2026
+
+**O que foi feito:** início da entrega N3, com a implementação da tarefa #9
+do backlog (RNF04): manter cada questão da prova, incluindo enunciado e
+alternativas, inteira na mesma página do PDF sempre que ela couber na área
+útil.
+
+**Como foi feito:**
+- Criei a branch `feature/n3-questao-sem-cortar` a partir da `main`,
+  seguindo o padrão de nomeação por tipo de mudança e etapa da entrega.
+- Registrei a implementação em dois commits:
+  - `feat: constantes de layout da folha compartilhadas entre PDF e leitor`:
+    criação de `LayoutFolha` para centralizar as medidas da folha, dos
+    marcadores, do QR Code e das bolinhas usadas pelo gerador e pelo leitor.
+  - `feat: questao inteira na pagina do PDF, sem cortar no meio`: uso de
+    `pw.Inseparable` para mover questões completas para a página seguinte,
+    mantendo um plano alternativo apenas para uma questão excepcionalmente
+    alta, além da injeção do documento no `PdfService` para os testes.
+- Abri a PR #39 com o nome `Feature/n3 questao sem cortar`, mantendo o
+  padrão de identificação da etapa e do objetivo da alteração.
+- Validei o comportamento com testes cobrindo 92 combinações de tamanho e
+  também o caso de uma questão maior que a página.
+- Durante a revisão, solicitei duas correções antes do merge: não mascarar
+  erros genéricos com `catch (Exception)` e manter as questões normais
+  inseparáveis mesmo quando houver uma questão excepcionalmente alta.
+
+**Resultado:** a N3 foi iniciada e a PR #39 está aberta para correções
+solicitadas na revisão. O requisito de não cortar questões comuns entre
+páginas já está coberto pela primeira implementação, mas o fallback para
+questões excepcionalmente altas precisa ser isolado antes da aprovação e
+do squash merge.
+
+**Imagens:**
+
+![PR #39 com solicitações de alteração](imagens/2026-11-12/01-pr39-changes-requested.png)
+*Revisão da PR #39 com as duas correções solicitadas antes do merge.*
 
 ---
 
