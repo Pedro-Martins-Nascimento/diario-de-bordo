@@ -35,6 +35,7 @@ imagem.
 | N2 | Manter o diário de bordo | este repositório | Contínua |
 | N3 | Evitar que questões sejam cortadas entre páginas no PDF (RNF04) | PR #39 | Em andamento |
 | N3 | Validar foco, iluminação e marcadores antes da correção | PR #40 | Concluída |
+| N3 | Atualizar interface, criação/edição de provas e menu da conta | PR #43 | Concluída |
 
 ---
 
@@ -1134,6 +1135,41 @@ mensagens de erro e persistência do perfil no Firebase Authentication.
 
 ![PR #41 aprovada e mergeada](imagens/2026-11-12/03-pr41-aprovada-mergeada.png)
 *Aprovação e merge da PR #41, com a tela de cadastro de professor.*
+
+---
+
+## 12/11/2026 — PR #43
+
+**O que foi feito:** revisão, aprovação e merge da PR #43
+(`feat: minimalist UI, exam editing and account menu`, autora
+KelciaAntiuk), com a atualização visual do aplicativo e melhorias nos fluxos
+de provas e conta.
+
+**Como foi feito:**
+- Revisei a PR #43 (`feat/ui-minimalista` → `main`), com 5 commits e
+  22 arquivos alterados.
+- A implementação atualizou a interface para um visual mais limpo, com
+  cartões, navegação por ícones, cabeçalhos e listas agrupadas em Turmas,
+  Matérias e Provas, incluindo estados vazios e conteúdo limitado no
+  desktop.
+- A tela de Nova Prova passou a permitir a criação de questões sem sair do
+  fluxo, usando a matéria selecionada.
+- O fluxo de edição de provas foi incluído: provas sem correções podem ser
+  regravadas no mesmo registro, enquanto provas com correções permitem
+  apenas a alteração do nome.
+- O logout foi movido para o menu da conta, no menu lateral do desktop e no
+  menu do avatar em telas menores.
+- Verifiquei a implementação visual, a navegação, a criação e edição de
+  provas e os testes direcionados. A PR foi aprovada e mergeada na `main`.
+
+**Resultado:** PR #43 aprovada e mergeada na `main`. O aplicativo recebeu
+uma interface mais consistente e os fluxos de criação/edição de provas e
+gerenciamento da conta ficaram integrados à nova navegação.
+
+**Imagens:**
+
+![PR #43 aprovada e mergeada](imagens/2026-11-12/04-pr43-aprovada-mergeada.png)
+*Aprovação e merge da PR #43 após a revisão da interface e dos fluxos.*
 
 ---
 
